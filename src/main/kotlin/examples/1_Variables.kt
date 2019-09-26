@@ -12,7 +12,7 @@ const val CONSTANT = 1.2
 
 fun main() {
     var variable: String
-    
+
     //read-only variable
     val value: String
 
@@ -59,7 +59,9 @@ fun main() {
         obj("fooProperty" to initializedValue,
                 "fooNode" to obj(
                         "fooArray" to array(1, 2, initializedValue.length)
-                )
+                ),
+                "anotherArray" to array(array(1, 2), array("a", "b")),
+                "objectArray" to array(obj("foo" to 1), obj("bool" to  false))
         )
     }
     println(generatedJson.toJsonString(true))

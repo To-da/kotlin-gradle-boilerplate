@@ -8,6 +8,8 @@ import kotlin.random.nextUInt
  */
 
 fun main() {
+
+
     fun function() {
     }
 
@@ -34,14 +36,14 @@ fun main() {
     }
 
     //destructuring in lambdas + underscore for unused variable
-    map.mapValues { (_, value) -> "$value  of map"}.forEach(::println)
+    map.mapValues { (_, value) -> "$value  of map" }.forEach(::println)
 
     //how destructuring  works - convention - operator componentN
 
-    
+
     //lambdas - syntax - always curly braces  , small piece of behavior, can be stored in variable, more often directly passed to function
 
-    List(10){ Random.nextInt()}
+    List(10) { Random.nextInt() }
 
     //using "it" keyword
     val lambda: (UInt) -> String
@@ -49,21 +51,21 @@ fun main() {
         println(lambda(Random.nextUInt()))
     }
 
-    lambda = { integer -> integer.toString()}
+    lambda = { integer -> integer.toString() }
 //    lambda = { it.toString()}
 //    lambda = Int::toString
 
     lambdaAsArg(lambda)
 
     //defining lambda  directly
-    lambdaAsArg { it.dec().toString()}
+    lambdaAsArg { it.dec().toString() }
 
-    fun lambdaAsArgWithParam(defaultvalue:UInt, lambda: ((UInt) -> String)) {
+    fun lambdaAsArgWithParam(defaultvalue: UInt, lambda: ((UInt) -> String)) {
         println(lambda(Random.nextUInt()))
     }
 
     //outside of arg parenthesis - works only for one lambda argument (convention)
-    lambdaAsArgWithParam(UInt.MAX_VALUE) { it.dec().toString()}
+    lambdaAsArgWithParam(UInt.MAX_VALUE) { it.dec().toString() }
 
     lambdaAsArgWithParam(UInt.MAX_VALUE, lambda)
 
@@ -81,6 +83,7 @@ fun main() {
     println(listOf("a", "ab", "abc").filter(oddLength))
 
 
+
     //extension functions
     fun String.hello(): String {
         return "hello ${this.capitalize()} !"
@@ -90,9 +93,32 @@ fun main() {
 
     //scope functions (standard library - Standard.kt)  -  let/also/run/apply + with   https://kotlinlang.org/docs/reference/scope-functions.html
 
-    data class FooClass(var foo:String)
+    data class FooClass(var foo: String)
 
     FooClass("f").foo = "x"
 
     //operators overloading - see Control flow
+
+
+    // invoke function type
+    val stringPlus: (String, String) -> String = String::plus
+
+    val stringPlusReceiver: String.(String) -> String = String::plus
+
+    println(stringPlus.invoke("f", "f"))
+    println(stringPlus("f", "f"))
+//    println( "f".stringPlus( "f"))
+
+    println(stringPlusReceiver.invoke("f", "f"))
+    println(stringPlusReceiver("f", "f"))
+    println("f".stringPlusReceiver("f"))
+
+    val chessTurn: String.(Int) -> String = { x -> "$this:$x" }
+//    val chessTurn: String.(number: Int) -> String = {  "$this:$it" }
+
+    println("A".chessTurn(1))
+
+//    val chessTurnComplex: String.(Int) -> (String) -> Array<String> = { x -> {"$this:$it" + "B"} }
+
+//    println("A".chessTurnComplex(1))
 }

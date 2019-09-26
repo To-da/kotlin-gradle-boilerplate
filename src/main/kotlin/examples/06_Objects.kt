@@ -8,8 +8,7 @@ interface ObjectInterface {
 
     val foo: String
 
-
-
+    
     fun fooOperator()
 
     fun fooWithDefaultOperator() = "FooResult"

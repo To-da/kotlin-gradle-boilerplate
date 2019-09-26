@@ -1,6 +1,6 @@
 package examples
 
-import java.util.*
+import java.util.Arrays
 import kotlin.math.pow
 
 /**
@@ -69,3 +69,14 @@ fun main() {
 
     println(x)
 }
+
+fun sumPairs() {
+    Pair("", 1) + Pair("", 1)
+}
+
+//operator fun Any.plus(any:Any): Any= throw RuntimeException()
+
+
+operator fun Pair<*, Int>.plus(any:Pair<*, Int>) = Pair("sum", this.second + any.second)
+
+//operator fun Pair<String, Int>.plus(any:Pair<String, Int>): Pair<String, Int> = throw RuntimeException()

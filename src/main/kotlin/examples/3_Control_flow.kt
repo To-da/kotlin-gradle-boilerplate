@@ -33,7 +33,28 @@ fun main() {
     }
 
     //---------//
+
+//    when
+    val collection = listOf(1, 3, 7, 2)
+    val element = 2
+    val isInCollection = when (element) {
+        in collection -> true
+        else -> false
+    }
+    println(isInCollection)
+
+
+    val nullvalue: Day? = null
+
+    val dayOfTheWeek = when (nullvalue) {
+        Day.MO -> "monday"
+        Day.TU -> "tuesday"
+        null -> "unknown"
+    }
+    println(dayOfTheWeek)
 }
+
+enum class Day { MO, TU }
 
 operator fun Number.compareTo(number: Number): Int {
     return when (number) {
@@ -44,18 +65,30 @@ operator fun Number.compareTo(number: Number): Int {
     }
 }
 
-sealed class SealedClass 
+sealed class SealedClass
 class First : SealedClass()
 class Second : SealedClass()
 class Third : SealedClass()
+
+enum class FooS { A, B }
+
+fun test(foo: FooS) {
+    val x = when (foo) {
+        FooS.A -> "a"
+        FooS.B -> "b"
+//        else -> "c"
+    }
+}
 
 
 fun test(sealedClass: SealedClass) {
     val x = when (sealedClass) {
         is First -> println("first")
         is Second -> println("second")
-        is Third ->  println("third")
+        is Third -> println("third")
 //        else -> ("nothing")
-        }
+    }
 }
+
+
 
